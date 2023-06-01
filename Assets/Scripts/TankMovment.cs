@@ -1,12 +1,6 @@
-using JetBrains.Annotations;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.PlayerLoop;
-using static UnityEditor.PlayerSettings;
+
 
 public class TankMovment : MonoBehaviour
 {
@@ -20,8 +14,12 @@ public class TankMovment : MonoBehaviour
     public Transform tankPos;
     public float rotationSpeed;
     [Header("TurretMovement")]
-    public float turretRotationSpeed;
-    public Transform turretOrientaion;
+    public float sensX;
+    public float sensY;
+    public Transform orientation;
+    float xRotation;
+    float yRotation;
+    public Transform turretRing; 
 
 
 
@@ -54,19 +52,6 @@ public class TankMovment : MonoBehaviour
         actualAcc = Mathf.Clamp(desiredAcc, -maxGroundForce, maxGroundForce);
         acc.z = actualAcc;
 
-        vel += acc * Time.deltaTime;
-        pos += vel * Time.deltaTime;
-
-        tankPos.position = pos;
-
-        //tanks pos on ground with raycast
-        RaycastHit hitInfo = Physics.Raycast(pos, Vector3.down, 0.5f);
-        if (hitInfo)
-        {
-            float overLapDepth = 0.5f - hitInfo.distance;
-            pos.y += overLapDepth;
-        }
-
         //Tank rotation
 
         if (Input.GetKey(KeyCode.D))
@@ -78,7 +63,41 @@ public class TankMovment : MonoBehaviour
             transform.Rotate(0f, -rotationSpeed * Time.deltaTime, 0f);
         }
 
+        //tanks pos on ground with raycast
+
+
+        bool hitSomething = Physics.Raycast(pos, Vector3.down, out RaycastHit hitInfo, 0.5f);
+
+        if (hitSomething)
+        {
+            //if (hitInfo.)
+            float overLapDepth = 0.5f - hitInfo.distance;
+            pos.y += overLapDepth;
+            vel.y = 0f;
+        }
+
+       
+        vel += acc * Time.deltaTime;
+        pos += vel * Time.deltaTime;
+
+        tankPos.position = pos;
+
+        GameObject turretRing = GameObject.Find("turretRing");
+        //Turret Rotaion with cam
+        // get mouse input 
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
+            float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+
+            yRotation += mouseX;
+            xRotation -= mouseY;
+
+        // rotate cam and orientaion
+        turretRing.transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+            orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+
+        
     }
+
 
 }
 
