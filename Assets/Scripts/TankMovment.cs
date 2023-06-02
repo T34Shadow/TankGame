@@ -6,13 +6,12 @@ public class TankMovment : MonoBehaviour
 {
     //Tank movement
 
-
-    Vector3 vel;
     [Header("TankMovement")]
     public float speed;
     public float maxGroundForce;
     public Transform tankPos;
     public float rotationSpeed;
+
     [Header("TurretMovement")]
     public float sensX;
     public float sensY;
@@ -37,20 +36,29 @@ public class TankMovment : MonoBehaviour
         float Movement = Input.GetAxis("Vertical");
 
         Vector3 pos = transform.position;
-        Vector3 acc = new Vector3(0f, -9.81f, 0f);
 
-        float desiredSpeed = Movement * speed;
+        //oldMovement
+        {
 
+            // float desiredSpeed = Movement * speed;
+            //
+            //
+            // float actualSpeed = vel.z;
+            //
+            // float desiredChangeSpeed = desiredSpeed - actualSpeed;
+            // float desiredAcc = desiredChangeSpeed / Time.deltaTime;
+            //
+            // float actualAcc;
+            //
+            // actualAcc = Mathf.Clamp(desiredAcc, -maxGroundForce, maxGroundForce);
+            // acc.z = actualAcc;
+        }
+        // New movement
 
-        float actualSpeed = vel.z;
+        float desSpeed = Movement * speed * Time.deltaTime;
 
-        float desiredChangeSpeed = desiredSpeed - actualSpeed;
-        float desiredAcc = desiredChangeSpeed / Time.deltaTime;
-
-        float actualAcc;
-
-        actualAcc = Mathf.Clamp(desiredAcc, -maxGroundForce, maxGroundForce);
-        acc.z = actualAcc;
+        transform.Translate(0f, 0f, desSpeed);
+        
 
         //Tank rotation
 
@@ -63,40 +71,33 @@ public class TankMovment : MonoBehaviour
             transform.Rotate(0f, -rotationSpeed * Time.deltaTime, 0f);
         }
 
-        //tanks pos on ground with raycast
+        
 
 
-        bool hitSomething = Physics.Raycast(pos, Vector3.down, out RaycastHit hitInfo, 0.5f);
 
-        if (hitSomething)
-        {
-            //if (hitInfo.)
-            float overLapDepth = 0.5f - hitInfo.distance;
-            pos.y += overLapDepth;
-            vel.y = 0f;
-        }
+    }
 
        
-        vel += acc * Time.deltaTime;
-        pos += vel * Time.deltaTime;
-
-        tankPos.position = pos;
-
-        GameObject turretRing = GameObject.Find("turretRing");
-        //Turret Rotaion with cam
-        // get mouse input 
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-            float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
-
-            yRotation += mouseX;
-            xRotation -= mouseY;
-
-        // rotate cam and orientaion
-        turretRing.transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-            orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+       
+        
 
         
-    }
+
+        //GameObject turretRing = GameObject.Find("turretRing");
+        ////Turret Rotaion with cam
+        //// get mouse input 
+        //float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
+        //    float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+        //
+        //    yRotation += mouseX;
+        //    xRotation -= mouseY;
+        //
+        //// rotate cam and orientaion
+        //turretRing.transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        //    orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+
+        
+    
 
 
 }

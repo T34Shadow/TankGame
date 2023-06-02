@@ -607,6 +607,7 @@ GameObject:
   m_Component:
   - component: {fileID: 556933086}
   - component: {fileID: 556933087}
+  - component: {fileID: 556933088}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -644,7 +645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f17acfdddfb3e4d911a7b5a88b8c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 10
   maxGroundForce: 10
   tankPos: {fileID: 556933086}
   rotationSpeed: 100
@@ -652,6 +653,20 @@ MonoBehaviour:
   sensY: 0
   orientation: {fileID: 660538494}
   turretRing: {fileID: 222434731}
+--- !u!114 &556933088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556933085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c1e7bc2c1e133b40a2871910ea499d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vel: {x: 0, y: 0, z: 0}
+  gravity: 9.81
 --- !u!1 &660538493
 GameObject:
   m_ObjectHideFlags: 0
@@ -1976,6 +1991,7 @@ GameObject:
   - component: {fileID: 1550195332}
   - component: {fileID: 1550195331}
   - component: {fileID: 1550195330}
+  - component: {fileID: 1550195333}
   m_Layer: 0
   m_Name: Pillar (2)
   m_TagString: Untagged
@@ -2061,6 +2077,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550195328}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1550195333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550195328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c1e7bc2c1e133b40a2871910ea499d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vel: {x: 0, y: 0, z: 0}
+  gravity: 9.81
 --- !u!1 &1597772453
 GameObject:
   m_ObjectHideFlags: 0
