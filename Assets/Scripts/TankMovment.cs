@@ -1,4 +1,5 @@
 
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -11,15 +12,20 @@ public class TankMovment : MonoBehaviour
     public float maxGroundForce;
     public Transform tankPos;
     public float rotationSpeed;
-
     [Header("TurretMovement")]
     public float sensX;
     public float sensY;
     public Transform orientation;
     float xRotation;
     float yRotation;
-    public Transform turretRing; 
-
+    public GameObject turretRing;
+    [Header("Barrel")]
+    public Transform barrel;
+    public Transform barrelLocation;
+    public Transform shellSpawn;
+    public float elevationSpeed;
+    public float minEleHieght;
+    public float maxEleHieght;
 
 
     // Start is called before the first frame update
@@ -34,25 +40,10 @@ public class TankMovment : MonoBehaviour
     {
         //Tank Movement
         float Movement = Input.GetAxis("Vertical");
+        
+        
 
-        Vector3 pos = transform.position;
-
-        //oldMovement
-        {
-
-            // float desiredSpeed = Movement * speed;
-            //
-            //
-            // float actualSpeed = vel.z;
-            //
-            // float desiredChangeSpeed = desiredSpeed - actualSpeed;
-            // float desiredAcc = desiredChangeSpeed / Time.deltaTime;
-            //
-            // float actualAcc;
-            //
-            // actualAcc = Mathf.Clamp(desiredAcc, -maxGroundForce, maxGroundForce);
-            // acc.z = actualAcc;
-        }
+        
         // New movement
 
         float desSpeed = Movement * speed * Time.deltaTime;
@@ -71,33 +62,63 @@ public class TankMovment : MonoBehaviour
             transform.Rotate(0f, -rotationSpeed * Time.deltaTime, 0f);
         }
 
+
+        //Turret Rotaion with mouse on cam
+        
+        // get mouse input 
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+
+        yRotation += mouseX;
+        xRotation -= mouseY;
+
+        // rotate cam and orientaion
+        turretRing.transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+
+        //barrel location reletive to turretRing
+
+        
+        
+        //Barrel elevation with shift & ctrl
+
+        //get input
+        bool barrelUp = Input.GetKey(KeyCode.LeftShift);
+        bool barrelDown = Input.GetKey(KeyCode.LeftControl);
+
+
+        float changeInRotation = 0.5f;
         
 
+        if (barrelUp) 
+        {
+            
+            if(barrel.localRotation.x <= -0.05)
+            {
+                changeInRotation = 0;
+            }
+            barrel.transform.Rotate(-changeInRotation, 0, 0);
+        }
 
+        if (barrelDown)
+        {
+            if (barrel.localRotation.x >= 0.04)
+            {
+                changeInRotation = 0;
+            }
+            barrel.transform.Rotate(changeInRotation, 0, 0);
+        }
 
     }
 
-       
-       
-        
 
-        
 
-        //GameObject turretRing = GameObject.Find("turretRing");
-        ////Turret Rotaion with cam
-        //// get mouse input 
-        //float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        //    float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
-        //
-        //    yRotation += mouseX;
-        //    xRotation -= mouseY;
-        //
-        //// rotate cam and orientaion
-        //turretRing.transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        //    orientation.rotation = Quaternion.Euler(0, yRotation, 0);
 
-        
-    
+
+
+
+
+
 
 
 }
