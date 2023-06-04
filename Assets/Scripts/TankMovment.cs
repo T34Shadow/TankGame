@@ -1,5 +1,6 @@
 
 using Unity.VisualScripting;
+using UnityEditor.Search;
 using UnityEngine;
 
 
@@ -16,17 +17,18 @@ public class TankMovment : MonoBehaviour
     public float sensX;
     public float sensY;
     public Transform orientation;
+    public Transform elevationMentlet;
     float xRotation;
     float yRotation;
     public GameObject turretRing;
     [Header("Barrel")]
-    public Transform barrel;
+    public Transform barrelPivotPoint;
     public Transform barrelLocation;
     public Transform shellSpawn;
     public float elevationSpeed;
     public float minEleHieght;
     public float maxEleHieght;
-
+    
 
     // Start is called before the first frame update
     void Start()
@@ -76,39 +78,57 @@ public class TankMovment : MonoBehaviour
         turretRing.transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
 
+        
         //barrel location reletive to turretRing
 
-        
-        
-        //Barrel elevation with shift & ctrl
+        Vector3 BarrelPos = new Vector3(barrelLocation.position.x, barrelLocation.position.y, barrelLocation.position.z);
+        barrelPivotPoint.position = BarrelPos;
 
+
+        barrelPivotPoint.transform.rotation = orientation.transform.rotation;//while this line of code is running, it does not allow for change in elevation on the barrel, however it allows for barrel location to be updated to the turrets location.
+
+        
+
+
+        //Barrel cam
+
+       // if (Input.GetKey(KeyCode.Mouse1))
+       // {
+       //     
+       // }
+
+        //Barrel elevation with shift & ctrl
         //get input
         bool barrelUp = Input.GetKey(KeyCode.LeftShift);
         bool barrelDown = Input.GetKey(KeyCode.LeftControl);
 
 
-        float changeInRotation = 0.5f;
+        float changeInRotation = elevationSpeed;
         
 
         if (barrelUp) 
         {
             
-            if(barrel.localRotation.x <= -0.05)
+            if(barrelPivotPoint.localRotation.x <= -maxEleHieght)
             {
                 changeInRotation = 0;
             }
-            barrel.transform.Rotate(-changeInRotation, 0, 0);
+
+            barrelPivotPoint.Rotate(-changeInRotation, 0, 0);
         }
 
         if (barrelDown)
         {
-            if (barrel.localRotation.x >= 0.04)
+            if (barrelPivotPoint.localRotation.x >= minEleHieght)
             {
                 changeInRotation = 0;
             }
-            barrel.transform.Rotate(changeInRotation, 0, 0);
+
+            barrelPivotPoint.Rotate(changeInRotation, 0, 0);
         }
 
+
+        
     }
 
 
