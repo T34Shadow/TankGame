@@ -408,6 +408,7 @@ MonoBehaviour:
   sensX: 100
   sensY: 0
   orientation: {fileID: 5492675024321467804}
+  elevationMentlet: {fileID: 0}
   turretRing: {fileID: 5492675024689710152}
   barrelPivotPoint: {fileID: 0}
   barrelLocation: {fileID: 5492675023132588152}

@@ -13,6 +13,7 @@ public class TankMovment : MonoBehaviour
     public float maxGroundForce;
     public Transform tankPos;
     public float rotationSpeed;
+
     [Header("TurretMovement")]
     public float sensX;
     public float sensY;
@@ -21,6 +22,7 @@ public class TankMovment : MonoBehaviour
     float xRotation;
     float yRotation;
     public GameObject turretRing;
+
     [Header("Barrel")]
     public Transform barrelPivotPoint;
     public Transform barrelLocation;
@@ -28,7 +30,14 @@ public class TankMovment : MonoBehaviour
     public float elevationSpeed;
     public float minEleHieght;
     public float maxEleHieght;
-    
+
+    [Header("Carrma")]
+    public Transform ThiredPersomCamPos;
+    public Transform FirstPersomCamPos;
+    public Camera MainCam;
+
+    [Header("Shell")]
+    public GameObject Shell;
 
     // Start is called before the first frame update
     void Start()
@@ -40,13 +49,20 @@ public class TankMovment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //Barrel cam
+
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            MainCam.transform.position = FirstPersomCamPos.transform.position;
+        }
+        else
+        {
+            MainCam.transform.position = ThiredPersomCamPos.transform.position;
+        }
+
         //Tank Movement
         float Movement = Input.GetAxis("Vertical");
-        
-        
-
-        
-        // New movement
 
         float desSpeed = Movement * speed * Time.deltaTime;
 
@@ -83,19 +99,10 @@ public class TankMovment : MonoBehaviour
 
         Vector3 BarrelPos = new Vector3(barrelLocation.position.x, barrelLocation.position.y, barrelLocation.position.z);
         barrelPivotPoint.position = BarrelPos;
-
-
+       
+       
         barrelPivotPoint.transform.rotation = orientation.transform.rotation;//while this line of code is running, it does not allow for change in elevation on the barrel, however it allows for barrel location to be updated to the turrets location.
 
-        
-
-
-        //Barrel cam
-
-       // if (Input.GetKey(KeyCode.Mouse1))
-       // {
-       //     
-       // }
 
         //Barrel elevation with shift & ctrl
         //get input
