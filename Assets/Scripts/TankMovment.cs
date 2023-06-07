@@ -1,6 +1,4 @@
-
 using Unity.VisualScripting;
-using UnityEditor.Search;
 using UnityEngine;
 
 
@@ -27,6 +25,7 @@ public class TankMovment : MonoBehaviour
     public Transform barrelPivotPoint;
     public Transform barrelLocation;
     public Transform shellSpawn;
+    public GameObject barrel;
     public float elevationSpeed;
     public float minEleHieght;
     public float maxEleHieght;
@@ -38,6 +37,9 @@ public class TankMovment : MonoBehaviour
 
     [Header("Shell")]
     public GameObject Shell;
+    public GameObject canister;
+    public Transform canisterSpwanPoint;
+
 
     // Start is called before the first frame update
     void Start()
@@ -67,7 +69,7 @@ public class TankMovment : MonoBehaviour
         float desSpeed = Movement * speed * Time.deltaTime;
 
         transform.Translate(0f, 0f, desSpeed);
-        
+
 
         //Tank rotation
 
@@ -82,7 +84,7 @@ public class TankMovment : MonoBehaviour
 
 
         //Turret Rotaion with mouse on cam
-        
+
         // get mouse input 
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
@@ -94,14 +96,14 @@ public class TankMovment : MonoBehaviour
         turretRing.transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
 
-        
+
         //barrel location reletive to turretRing
 
         Vector3 BarrelPos = new Vector3(barrelLocation.position.x, barrelLocation.position.y, barrelLocation.position.z);
         barrelPivotPoint.position = BarrelPos;
-       
-       
-        barrelPivotPoint.transform.rotation = orientation.transform.rotation;//while this line of code is running, it does not allow for change in elevation on the barrel, however it allows for barrel location to be updated to the turrets location.
+
+
+        barrelPivotPoint.transform.rotation = orientation.transform.rotation;
 
 
         //Barrel elevation with shift & ctrl
@@ -111,12 +113,12 @@ public class TankMovment : MonoBehaviour
 
 
         float changeInRotation = elevationSpeed;
-        
 
-        if (barrelUp) 
+
+        if (barrelUp)
         {
-            
-            if(barrelPivotPoint.localRotation.x <= -maxEleHieght)
+
+            if (barrelPivotPoint.localRotation.x <= -maxEleHieght)
             {
                 changeInRotation = 0;
             }
@@ -135,7 +137,27 @@ public class TankMovment : MonoBehaviour
         }
 
 
-        
+        //Tank shooting on commnaned with tank cansister being ejeced out the top of the turrect cap.
+
+        bool Shoot = Input.GetKeyDown(KeyCode.Mouse0);
+
+        if (Shoot)
+        {
+            //shell spwan
+            GameObject CloneShell = Instantiate(Shell, shellSpawn.position, elevationMentlet.transform.rotation) as GameObject;
+            
+            //canister spwan
+
+            GameObject CloneCnaister = Instantiate(canister, canisterSpwanPoint.position, elevationMentlet.transform.rotation) as GameObject;
+
+            //barrel recoil
+
+            //   Vector3 barrelRecoil = new Vector3(0, 0, 1);
+            //   Vector3 barrelLoc ;
+
+
+        }
+
     }
 
 

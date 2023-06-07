@@ -60,12 +60,18 @@ MonoBehaviour:
   barrelPivotPoint: {fileID: 6740070377368785108}
   barrelLocation: {fileID: 1593747480695149469}
   shellSpawn: {fileID: 431564189854433404}
+  barrel: {fileID: 0}
   elevationSpeed: 0.1
   minEleHieght: 0.04
   maxEleHieght: -0.05
   ThiredPersomCamPos: {fileID: 0}
   FirstPersomCamPos: {fileID: 0}
   MainCam: {fileID: 0}
+  Shell: {fileID: 0}
+  shellSpeed: 0
+  drag: 0
+  canister: {fileID: 0}
+  canisterSpwanPoint: {fileID: 0}
 --- !u!114 &1684902016754100690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,6 +129,7 @@ GameObject:
   - component: {fileID: 8434920846499001200}
   - component: {fileID: 756905899436539048}
   - component: {fileID: 6445935256174587933}
+  - component: {fileID: 1186544427050252973}
   m_Layer: 0
   m_Name: RightWheel
   m_TagString: Untagged
@@ -195,6 +202,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1186544427050252973
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375544696521769585}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3758573805739257388, guid: 7358f8d86cd2567429fd6a15efdf31c2, type: 3}
 --- !u!1 &2045285568744662763
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,6 +227,7 @@ GameObject:
   - component: {fileID: 4682849453413090769}
   - component: {fileID: 6784311195492983444}
   - component: {fileID: 8257047369757839767}
+  - component: {fileID: 555762963836859906}
   m_Layer: 0
   m_Name: Hatch
   m_TagString: Untagged
@@ -278,6 +300,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &555762963836859906
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045285568744662763}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6130675, y: 0.17402023, z: 0.6130678}
+  m_Center: {x: 0.00000010430813, y: 0.0056000724, z: -0.00000008940697}
 --- !u!1 &2227057302368769563
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,6 +324,7 @@ GameObject:
   - component: {fileID: 6436216200619456417}
   - component: {fileID: 3435067546526990970}
   - component: {fileID: 1787618540775559418}
+  - component: {fileID: 678731820094003561}
   m_Layer: 0
   m_Name: TurretCap
   m_TagString: Untagged
@@ -309,6 +345,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4682849453413090769}
+  - {fileID: 6433698784123143286}
   m_Father: {fileID: 51626825412795906}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -362,6 +399,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &678731820094003561
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2227057302368769563}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3369316746193770658, guid: 7358f8d86cd2567429fd6a15efdf31c2, type: 3}
 --- !u!1 &2984569348551765430
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,6 +455,7 @@ GameObject:
   - component: {fileID: 2433899143171117933}
   - component: {fileID: 6758445121865369399}
   - component: {fileID: 5494536256059925648}
+  - component: {fileID: 7451104591824103250}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -476,6 +528,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7451104591824103250
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4105154138536068361}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8211372540250625004, guid: 7358f8d86cd2567429fd6a15efdf31c2, type: 3}
 --- !u!1 &4394000407590686728
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,6 +641,7 @@ GameObject:
   - component: {fileID: 2362413373204078467}
   - component: {fileID: 5868257550779581178}
   - component: {fileID: 6442757954109751112}
+  - component: {fileID: 9170693288185260477}
   m_Layer: 0
   m_Name: Hull
   m_TagString: Untagged
@@ -650,6 +717,51 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &9170693288185260477
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4728176281100497161}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5302568919011541938, guid: 7358f8d86cd2567429fd6a15efdf31c2, type: 3}
+--- !u!1 &4910515217104922259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6433698784123143286}
+  m_Layer: 0
+  m_Name: CanisterSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6433698784123143286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4910515217104922259}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.09, y: 0.471, z: -1.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6436216200619456417}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6054836856921041794
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,7 +773,7 @@ GameObject:
   - component: {fileID: 6740070377368785108}
   - component: {fileID: 5803039929918611258}
   - component: {fileID: 1873197942923323841}
-  - component: {fileID: 2964279448775486309}
+  - component: {fileID: 4674281229516727217}
   m_Layer: 0
   m_Name: ElevationMentel
   m_TagString: Untagged
@@ -737,8 +849,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &2964279448775486309
-CapsuleCollider:
+--- !u!65 &4674281229516727217
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -747,10 +859,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 2
+  m_Size: {x: 1.0000005, y: 2.0000005, z: 1.0000004}
+  m_Center: {x: 0.000000059604666, y: 0, z: -0.00000008940698}
 --- !u!1 &6861615370787245552
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,6 +935,7 @@ GameObject:
   - component: {fileID: 3433632817541639037}
   - component: {fileID: 8763090811987583999}
   - component: {fileID: 4552568827347245931}
+  - component: {fileID: 6411318795677245324}
   m_Layer: 0
   m_Name: Flag
   m_TagString: Untagged
@@ -896,6 +1008,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6411318795677245324
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8060087971599575492}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7316865918732591153, guid: 7358f8d86cd2567429fd6a15efdf31c2, type: 3}
 --- !u!1 &8338169080634977156
 GameObject:
   m_ObjectHideFlags: 0
@@ -907,6 +1033,7 @@ GameObject:
   - component: {fileID: 4090390269289399967}
   - component: {fileID: 195390601450322356}
   - component: {fileID: 2316775222007184096}
+  - component: {fileID: 1066244319802506724}
   m_Layer: 0
   m_Name: LeftWheel
   m_TagString: Untagged
@@ -979,6 +1106,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1066244319802506724
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8338169080634977156}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3861478300804232965, guid: 7358f8d86cd2567429fd6a15efdf31c2, type: 3}
 --- !u!1 &8502704554818798175
 GameObject:
   m_ObjectHideFlags: 0
