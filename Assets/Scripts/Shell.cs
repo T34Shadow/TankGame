@@ -9,12 +9,12 @@ using static UnityEditor.PlayerSettings;
 
 public class Shell : MonoBehaviour
 {
-    public float speed;
-    public GameObject Shell01;
-    public Transform ori;
+    [SerializeField] private float speed;
+    [SerializeField] private GameObject Shell01;
+    [SerializeField] private Transform ori;
     public Vector3 vel = new Vector3();
-    public float gravity = 9.81f;
-    public float RayLangth = 0.7f;
+    [SerializeField] private float gravity = 9.81f;
+    [SerializeField] private float RayLength = 0.7f;
 
     //before the first frame update
     void Start()
@@ -25,21 +25,21 @@ public class Shell : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+            
         Vector3 acc = new Vector3(0f, -gravity, 0f);
 
         float desSpeed = speed * Time.deltaTime;
         transform.Translate(0f, 0f, desSpeed);
         Vector3 pos = transform.position;
-        
-        Vector3 dir = new Vector3(0, 0, 1);
-        bool hitSomething = Physics.Raycast(pos, dir, out RaycastHit hitInfo, RayLangth);
+
+        Vector3 dir = transform.forward;
+        bool hitSomething = Physics.Raycast(pos, dir, out RaycastHit hitInfo, RayLength);
         
         Debug.DrawRay(pos, dir, Color.red);
         if (hitSomething)
         {
             //if (hitInfo.)
-            float overLapDepth = RayLangth - hitInfo.distance;
+            float overLapDepth = RayLength - hitInfo.distance;
             pos.z += overLapDepth;
 
             GameObject.Destroy(Shell01);

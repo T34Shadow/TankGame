@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Canister : MonoBehaviour
 {
+    public float timer = 5;
+    [SerializeField] private GameObject canister;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +15,8 @@ public class Canister : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+            Object.Destroy(canister, timer);
         
     }
 }

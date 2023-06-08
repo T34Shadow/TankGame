@@ -1,3 +1,4 @@
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,38 +8,41 @@ public class TankMovment : MonoBehaviour
     //Tank movement
 
     [Header("TankMovement")]
-    public float speed;
-    public float maxGroundForce;
-    public Transform tankPos;
-    public float rotationSpeed;
+    [SerializeField] private float speed;
+    [SerializeField] private float maxGroundForce;
+    [SerializeField] private Transform tankPos;
+    [SerializeField] private float rotationSpeed;
 
     [Header("TurretMovement")]
-    public float sensX;
-    public float sensY;
-    public Transform orientation;
-    public Transform elevationMentlet;
+    [SerializeField] private float sensX;
+    [SerializeField] private float sensY;
+    [SerializeField] private Transform orientation;
+    [SerializeField] private Transform elevationMentlet;
     float xRotation;
     float yRotation;
-    public GameObject turretRing;
-
+    [SerializeField] private GameObject turretRing;
+   
     [Header("Barrel")]
-    public Transform barrelPivotPoint;
-    public Transform barrelLocation;
-    public Transform shellSpawn;
-    public GameObject barrel;
-    public float elevationSpeed;
-    public float minEleHieght;
-    public float maxEleHieght;
-
+    [SerializeField] private Transform barrelPivotPoint;
+    [SerializeField] private Transform barrelLocation;
+    [SerializeField] private Transform shellSpawn;
+    [SerializeField] private GameObject barrel;
+    [SerializeField] private float elevationSpeed;
+    [SerializeField] private float ZoomedElevationSpeed;
+    [SerializeField] private float minEleHieght;
+    [SerializeField] private float maxEleHieght;
+  
+   
+   
     [Header("Carrma")]
-    public Transform ThiredPersomCamPos;
-    public Transform FirstPersomCamPos;
-    public Camera MainCam;
-
+    [SerializeField] private Transform ThiredPersomCamPos;
+    [SerializeField] private Transform FirstPersomCamPos;
+    [SerializeField] private Camera MainCam;
+   
     [Header("Shell")]
-    public GameObject Shell;
-    public GameObject canister;
-    public Transform canisterSpwanPoint;
+    [SerializeField] private GameObject Shell;
+    [SerializeField] private GameObject canister;
+    [SerializeField] private Transform canisterSpwanPoint;
 
 
     // Start is called before the first frame update
@@ -53,14 +57,19 @@ public class TankMovment : MonoBehaviour
     {
 
         //Barrel cam
-
+        
         if (Input.GetKey(KeyCode.Mouse1))
         {
             MainCam.transform.position = FirstPersomCamPos.transform.position;
+            
+            //elevationSpeed = ZoomedElevationSpeed;
+            
         }
         else
         {
+           
             MainCam.transform.position = ThiredPersomCamPos.transform.position;
+            
         }
 
         //Tank Movement
@@ -88,24 +97,15 @@ public class TankMovment : MonoBehaviour
         // get mouse input 
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
-
+    
         yRotation += mouseX;
         xRotation -= mouseY;
-
+    
         // rotate cam and orientaion
         turretRing.transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
-
-
-        //barrel location reletive to turretRing
-
-        Vector3 BarrelPos = new Vector3(barrelLocation.position.x, barrelLocation.position.y, barrelLocation.position.z);
-        barrelPivotPoint.position = BarrelPos;
-
-
-        barrelPivotPoint.transform.rotation = orientation.transform.rotation;
-
-
+    
+    
         //Barrel elevation with shift & ctrl
         //get input
         bool barrelUp = Input.GetKey(KeyCode.LeftShift);
@@ -117,47 +117,53 @@ public class TankMovment : MonoBehaviour
 
         if (barrelUp)
         {
-
+            Debug.Log(barrelPivotPoint.localRotation.x);
             if (barrelPivotPoint.localRotation.x <= -maxEleHieght)
             {
                 changeInRotation = 0;
             }
 
-            barrelPivotPoint.Rotate(-changeInRotation, 0, 0);
+            barrelPivotPoint.Rotate(0, changeInRotation, 0);
         }
 
         if (barrelDown)
         {
+            Debug.Log(barrelPivotPoint.localRotation.x);
             if (barrelPivotPoint.localRotation.x >= minEleHieght)
             {
                 changeInRotation = 0;
             }
 
-            barrelPivotPoint.Rotate(changeInRotation, 0, 0);
+            barrelPivotPoint.Rotate(0, -changeInRotation, 0);
         }
 
 
         //Tank shooting on commnaned with tank cansister being ejeced out the top of the turrect cap.
 
-        bool Shoot = Input.GetKeyDown(KeyCode.Mouse0);
+        bool shoot = Input.GetKeyDown(KeyCode.Mouse0);
+        
 
-        if (Shoot)
+        if (shoot)
         {
             //shell spwan
             GameObject CloneShell = Instantiate(Shell, shellSpawn.position, elevationMentlet.transform.rotation) as GameObject;
-            
+
             //canister spwan
 
             GameObject CloneCnaister = Instantiate(canister, canisterSpwanPoint.position, elevationMentlet.transform.rotation) as GameObject;
-
+        }
+        if (shoot)
+        {
             //barrel recoil
 
-            //   Vector3 barrelRecoil = new Vector3(0, 0, 1);
-            //   Vector3 barrelLoc ;
-
+            barrel.transform.Translate(0, 0, -1);
+            
+            barrel.transform.Translate(0, 0, +1);
+                
+            
+            
 
         }
-
     }
 
 
