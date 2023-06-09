@@ -1,19 +1,19 @@
 using UnityEngine;
 
-public class Canister : MonoBehaviour
+public class PlayerSpawner : MonoBehaviour
 {
-    public float timer = 5;
-    [SerializeField] private GameObject canister;
+    public Transform playerSpwaner;
+    public Transform player;
     // Start is called before the first frame update
     void Start()
     {
+        player.transform.position = playerSpwaner.transform.position;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        Object.Destroy(canister, timer);
 
     }
 }

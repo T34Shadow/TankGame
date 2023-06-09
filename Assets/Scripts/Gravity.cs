@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class Gravity : MonoBehaviour
 {
@@ -9,7 +6,7 @@ public class Gravity : MonoBehaviour
     [SerializeField] private Vector3 vel = new Vector3();
     [SerializeField] private float gravity = 9.81f;
     [SerializeField] private float RayLength = 0.1f;
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +21,7 @@ public class Gravity : MonoBehaviour
         Vector3 acc = new Vector3(0f, -gravity, 0f);
         Vector3 dir = -transform.up;
         bool hitSomething = Physics.Raycast(pos, dir, out RaycastHit hitInfo, RayLength);
-        
+
         if (hitSomething)
         {
             //if (hitInfo.)
