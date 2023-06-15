@@ -38,7 +38,7 @@ public class Shell : MonoBehaviour
         {
             float overLapDepth = RayLength - hitInfo.distance;
             pos.z += overLapDepth;
-            //Instantiate
+            //Instantiate a exspotion upon hitining somthing
             GameObject.Destroy(shellObject);
         }
 

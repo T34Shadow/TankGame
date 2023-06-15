@@ -165,7 +165,7 @@ public class TankMovment : MonoBehaviour
         bool shoot = Input.GetKeyDown(KeyCode.Mouse0);
 
         //barrel cooldown
-
+        
         if (!canFire)
         {
             timer += Time.deltaTime;
@@ -195,15 +195,8 @@ public class TankMovment : MonoBehaviour
         {
             cooldownLightGreen.SetActive(true);
         }
-       // if (shoot)
-       // {
-       //     //barrel recoil
-       //
-       //     barrel.transform.Translate(0, 0, -1);
-       //
-       //     barrel.transform.Translate(0, 0, +1);
-       //
-       // }
+       
+      
         
 
 
