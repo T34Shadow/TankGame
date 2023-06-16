@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class TankMovment : MonoBehaviour
 {
-    //Tank movement
 
+    //Tank movement Properties  
     [Header("TankMovement")]
     public float forwardSpeed;
     public float backwardsSpeed;
     [SerializeField] private Transform tankPos;
     [SerializeField] private float rotationSpeed;
 
+    //Turret Properties 
     [Header("TurretMovement")]
     [SerializeField] private float sensX;
     [SerializeField] private float sensY;
@@ -21,6 +22,7 @@ public class TankMovment : MonoBehaviour
     float yRotation;
     [SerializeField] private GameObject turretRing;
 
+    //Barrel Properties 
     [Header("Barrel")]
     [SerializeField] private Transform barrelPivotPoint;
     [SerializeField] private Transform barrelLocation;
@@ -31,11 +33,13 @@ public class TankMovment : MonoBehaviour
     [SerializeField] private float minEleHieght;
     [SerializeField] private float maxEleHieght;
 
-    [Header("Carrma")]
+    //Camear Properties 
+    [Header("Camera")]
     [SerializeField] private Transform ThiredPersomCamPos;
     [SerializeField] private Transform FirstPersomCamPos;
     [SerializeField] private Camera MainCam;
 
+    //Shell Properties 
     [Header("Shell")]
     [SerializeField] private GameObject Shell;
     [SerializeField] private GameObject canister;
@@ -44,9 +48,9 @@ public class TankMovment : MonoBehaviour
     [SerializeField] private float timerBtwFire;
     [SerializeField] private bool canFire;
     [SerializeField] private GameObject cooldownLightGreen;
-  
 
 
+    //Conlition Properties 
     // [Header("RayCastPos")]
     // [SerializeField] private Transform frontRight;
     // [SerializeField] private Transform frontLeft;
@@ -59,6 +63,7 @@ public class TankMovment : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //This locks and hides the cursor to the centur of the screen
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -67,28 +72,24 @@ public class TankMovment : MonoBehaviour
     void Update()
     {
 
-        //Barrel cam
+        //Zooming in and changining camear pos
 
         if (Input.GetKey(KeyCode.Mouse1))
         {
             MainCam.transform.position = FirstPersomCamPos.transform.position;
-
-            //elevationSpeed = ZoomedElevationSpeed;
-
         }
         else
         {
 
             MainCam.transform.position = ThiredPersomCamPos.transform.position;
-
         }
 
         //Tank Movement
+        ////Get input
         bool forwardMovement = Input.GetKey(KeyCode.W);
         bool backwardsMovement = Input.GetKey(KeyCode.S);
 
-
-
+        //declearining what the speed should be by a change in time, and then applyining that to the tanks pos
         if (forwardMovement)
         {
             Vector3 desFwdSpeed = new Vector3(0, 0, forwardSpeed * Time.deltaTime);
@@ -114,7 +115,7 @@ public class TankMovment : MonoBehaviour
         }
 
 
-        //Turret Rotaion with mouse on cam
+        //Turret Rotaion with mouse on camear
 
         // get mouse input 
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
@@ -132,15 +133,13 @@ public class TankMovment : MonoBehaviour
         //get input
         bool barrelUp = Input.GetKey(KeyCode.LeftShift);
         bool barrelDown = Input.GetKey(KeyCode.LeftControl);
-
-
         float changeInRotation = elevationSpeed;
 
 
-        if (barrelUp)
+        if (barrelUp) // allowing the tank's barrel to be rotated upwards 
         {
             Debug.Log(barrelPivotPoint.localRotation.x);
-            if (barrelPivotPoint.localRotation.x <= -maxEleHieght)
+            if (barrelPivotPoint.localRotation.x <= -maxEleHieght) // stopping the roation at a max hight 
             {
                 changeInRotation = 0;
             }
@@ -148,10 +147,10 @@ public class TankMovment : MonoBehaviour
             barrelPivotPoint.Rotate(0, changeInRotation, 0);
         }
 
-        if (barrelDown)
+        if (barrelDown) // allowimg the tank's barrel to be rotated downwards
         {
             Debug.Log(barrelPivotPoint.localRotation.x);
-            if (barrelPivotPoint.localRotation.x >= minEleHieght)
+            if (barrelPivotPoint.localRotation.x >= minEleHieght) // stopping the roation at a min light
             {
                 changeInRotation = 0;
             }
@@ -164,29 +163,28 @@ public class TankMovment : MonoBehaviour
 
         bool shoot = Input.GetKeyDown(KeyCode.Mouse0);
 
-        //barrel cooldown
+        //barrel reload
         
-        if (!canFire)
+        if (!canFire)//starting timer if can not fire 
         {
             timer += Time.deltaTime;
-                if (timer > timerBtwFire)
+                if (timer > timerBtwFire) // as soon as the timer gets to 0 canFire becomes true 
             {
                 canFire = true;
                 timer = 0;
 
             }
         }
-        if (shoot && canFire)
+        if (shoot && canFire) // only allowing the player to shoot when both are true
         {
             canFire = false;
-            //shell spwan
+            //shell spwan/cloneing 
             GameObject CloneShell = Instantiate(Shell, shellSpawn.position, elevationMentlet.transform.rotation) as GameObject;
 
-            //canister spwan
-
+            //canister spwan/cloneing 
             GameObject CloneCnaister = Instantiate(canister, canisterSpwanPoint.position, elevationMentlet.transform.rotation) as GameObject;
         }
-        if (!canFire)
+        if (!canFire) // changing a game object's active in world space 
         {
             cooldownLightGreen.SetActive(false);
             
