@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
-using UnityEngine.UIElements;
+
 
 public class EnemyBehavoir : MonoBehaviour
 {
@@ -13,7 +10,10 @@ public class EnemyBehavoir : MonoBehaviour
     [SerializeField] float backwardsSpeed;
     [SerializeField] float rotationSpeed;
     [SerializeField] GameObject tank;
-    //private bool isMoveing;
+
+    [SerializeField] private float timer;
+    [SerializeField] private float timerBtwAction;
+
 
 
     //Rotating tank Properties 
@@ -21,7 +21,7 @@ public class EnemyBehavoir : MonoBehaviour
     //Rotating turret Properties 
     [Header("Tank's turret properties")]
     [SerializeField] GameObject turretRing;
-    public float turretXaxis = 0;
+   
     //Barrel Properties 
 
     //Shell Properties 
@@ -30,8 +30,9 @@ public class EnemyBehavoir : MonoBehaviour
     [Header("Range to player Properties ")]
     [SerializeField] float maxFireRange;
     [SerializeField] float minProxiRange;
-    
+    [SerializeField] float maxProxiRange;
     private bool isNearPlayer;
+    private bool isToFar;
 
     //Line of fire
 
@@ -39,6 +40,7 @@ public class EnemyBehavoir : MonoBehaviour
     //Players Properties
     [Header("Player's Properties")]
     [SerializeField] GameObject PlayerTank;
+
 
     // Update is called once per frame
     void Update()
@@ -48,6 +50,15 @@ public class EnemyBehavoir : MonoBehaviour
         Vector3 tankPos = tank.transform.position;
 
         float displacementToPlayer = Vector3.Distance(tankPos, playerPos);
+
+        if (displacementToPlayer > maxProxiRange)
+        {
+            isToFar = true;
+        }
+        else
+        {
+            isToFar = false;
+        }
 
         if (displacementToPlayer < minProxiRange)
         {
@@ -73,33 +84,68 @@ public class EnemyBehavoir : MonoBehaviour
     public void TankMovement()
     {
         
+        
         if (isNearPlayer is true)
         {
             Flee();
         }
-        else if(isNearPlayer is false)
+        else if (isNearPlayer)
         {
             Repostion();
         }
+        else if (isToFar is true)
+        {
+            MoveTowardsPlayer();
+        }
+
     }
     public void Flee() //Flee - flee if the player gets to close 
 
     {
-        //if the player come close to the tnak, it will want to point at the player while moveing away
-        float velocity = backwardsSpeed * Time.deltaTime;
-        transform.Translate(0, 0, -velocity);
+        Vector3 playerPos = PlayerTank.transform.position;
+        Vector3 tankPos = tank.transform.position;
+
+        //if the player come close to the tank, it will want to point away from the player as it moves
+        float velocity = forwardSpeed * Time.deltaTime;
+        transform.Translate(0, 0, velocity);
+
+        float rotationVelocity = rotationSpeed * Time.deltaTime;
+        transform.Rotate(0, rotationVelocity, 0);
+        
+        
+        
+        
     }
 
     public void Repostion()  //repostion - if the tank is within range of the player but there is somthing in the line of fire
     {
+        
         float velocity = forwardSpeed * Time.deltaTime;
         transform.Translate(0, 0, velocity);
+        float roationVelocity = rotationSpeed * Time.deltaTime;
+        
+        
+        
     }
     public void AimAtPlayer()
     {
-        turretXaxis = turretRing.transform.rotation.x;
+        
         turretRing.transform.LookAt(PlayerTank.transform.position);
        
+        
+       
+    }
+    public void MoveTowardsPlayer()
+    {
+        Vector3 playerPos = PlayerTank.transform.position;
+        Vector3 tankPos = tank.transform.position;
+
+        
+        float velocity = forwardSpeed * Time.deltaTime;
+        transform.Translate(0, 0, velocity);
+
+        float rotationVelocity = rotationSpeed * Time.deltaTime;
+        transform.LookAt(playerPos);
     }
 
    
