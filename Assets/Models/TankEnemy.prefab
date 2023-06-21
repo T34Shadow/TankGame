@@ -92,7 +92,7 @@ Transform:
   m_Children:
   - {fileID: 5492675024647536227}
   m_Father: {fileID: 5492675024353119804}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5492675023693738871
 GameObject:
@@ -312,15 +312,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5492675023838582232}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.82000005, z: 0.30200005}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.2000017, z: 0.47700006}
+  m_LocalScale: {x: 0.5, y: 10, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5492675023693738868}
   - {fileID: 5492675023370147191}
-  m_Father: {fileID: 5492675024353119804}
-  m_RootOrder: 0
+  m_Father: {fileID: 5492675024689710153}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5492675024321467807
 GameObject:
@@ -363,6 +363,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5492675024353119804}
   - component: {fileID: 5492675024353119746}
+  - component: {fileID: 802416792729495774}
   m_Layer: 0
   m_Name: TankEnemy
   m_TagString: Enemy
@@ -382,7 +383,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5492675023838582233}
   - {fileID: 5492675023421004147}
   - {fileID: 5492675024689710153}
   m_Father: {fileID: 0}
@@ -402,6 +402,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vel: {x: 0, y: 0, z: 0}
   gravity: 9.81
+  RayLength: 0.5
+--- !u!114 &802416792729495774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5492675024353119807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6e81b1ab91c7a045acf267a29179756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardSpeed: 5
+  backwardsSpeed: 3
+  rotationSpeed: 0
+  tank: {fileID: 5492675024353119807}
+  maxFireRange: 0
+  minProxiRange: 20
+  PlayerTank: {fileID: 615831589951190711, guid: 122857696a0b79b499c488e115a64c45, type: 3}
 --- !u!1 &5492675024403267274
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,8 +651,9 @@ Transform:
   - {fileID: 5492675025039397585}
   - {fileID: 5492675024321467804}
   - {fileID: 5492675023132588152}
+  - {fileID: 5492675023838582233}
   m_Father: {fileID: 5492675024353119804}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5492675024689710159
 MeshFilter:

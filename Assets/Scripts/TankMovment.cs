@@ -14,13 +14,14 @@ public class TankMovment : MonoBehaviour
 
     //Turret Properties 
     [Header("TurretMovement")]
+    float xRotation;
+    float yRotation;
     [SerializeField] private float sensX;
     [SerializeField] private float sensY;
     [SerializeField] private Transform orientation;
     [SerializeField] private Transform elevationMentlet;
-    float xRotation;
-    float yRotation;
     [SerializeField] private GameObject turretRing;
+   
 
     //Barrel Properties 
     [Header("Barrel")]
@@ -138,7 +139,7 @@ public class TankMovment : MonoBehaviour
 
         if (barrelUp) // allowing the tank's barrel to be rotated upwards 
         {
-            Debug.Log(barrelPivotPoint.localRotation.x);
+            //Debug.Log(barrelPivotPoint.localRotation.x);
             if (barrelPivotPoint.localRotation.x <= -maxEleHieght) // stopping the roation at a max hight 
             {
                 changeInRotation = 0;
@@ -149,7 +150,7 @@ public class TankMovment : MonoBehaviour
 
         if (barrelDown) // allowimg the tank's barrel to be rotated downwards
         {
-            Debug.Log(barrelPivotPoint.localRotation.x);
+            //Debug.Log(barrelPivotPoint.localRotation.x);
             if (barrelPivotPoint.localRotation.x >= minEleHieght) // stopping the roation at a min light
             {
                 changeInRotation = 0;
@@ -172,7 +173,7 @@ public class TankMovment : MonoBehaviour
             {
                 canFire = true;
                 timer = 0;
-
+           
             }
         }
         if (shoot && canFire) // only allowing the player to shoot when both are true

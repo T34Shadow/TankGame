@@ -220,29 +220,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &270423816 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5492675024353119807, guid: 9e03bd8d5150a934ab7a8d76dfb7eb97, type: 3}
-  m_PrefabInstance: {fileID: 1367364386}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &270423819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270423816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6e81b1ab91c7a045acf267a29179756, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forwardSpeed: 5
-  backwardsSpeed: 3
-  tank: {fileID: 5492675024353119807, guid: 9e03bd8d5150a934ab7a8d76dfb7eb97, type: 3}
-  maxFireRange: 0
-  minProxiRange: 0
-  PlayerTank: {fileID: 615831589951190711, guid: 122857696a0b79b499c488e115a64c45, type: 3}
 --- !u!1 &445956199
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,6 +388,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &603263200 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5492675024689710152, guid: 9e03bd8d5150a934ab7a8d76dfb7eb97, type: 3}
+  m_PrefabInstance: {fileID: 1367364386}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,6 +601,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 802416792729495774, guid: 9e03bd8d5150a934ab7a8d76dfb7eb97, type: 3}
+      propertyPath: PlayerTank
+      value: 
+      objectReference: {fileID: 2117900192}
+    - target: {fileID: 802416792729495774, guid: 9e03bd8d5150a934ab7a8d76dfb7eb97, type: 3}
+      propertyPath: turretRing
+      value: 
+      objectReference: {fileID: 603263200}
+    - target: {fileID: 802416792729495774, guid: 9e03bd8d5150a934ab7a8d76dfb7eb97, type: 3}
+      propertyPath: rotationSpeed
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5492675024353119746, guid: 9e03bd8d5150a934ab7a8d76dfb7eb97, type: 3}
       propertyPath: whatever
       value: 0
@@ -1227,5 +1221,10 @@ PrefabInstance:
 --- !u!4 &2101069027 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4263089092526951537, guid: 122857696a0b79b499c488e115a64c45, type: 3}
+  m_PrefabInstance: {fileID: 1999942926}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2117900192 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 310628889456083258, guid: 122857696a0b79b499c488e115a64c45, type: 3}
   m_PrefabInstance: {fileID: 1999942926}
   m_PrefabAsset: {fileID: 0}
