@@ -1,4 +1,3 @@
-using System.Threading;
 using UnityEngine;
 
 
@@ -7,32 +6,32 @@ public class TankMovment : MonoBehaviour
 
     //Tank movement Properties  
     [Header("TankMovement")]
-    public float forwardSpeed;
-    public float backwardsSpeed;
-    [SerializeField] private Transform tankPos;
+    [SerializeField] private float forwardSpeed;
+    [SerializeField] private float backwardsSpeed;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private Transform tankPos;
 
     //Turret Properties 
     [Header("TurretMovement")]
-    float xRotation;
-    float yRotation;
+    private float xRotation;
+    private float yRotation;
     [SerializeField] private float sensX;
     [SerializeField] private float sensY;
     [SerializeField] private Transform orientation;
     [SerializeField] private Transform elevationMentlet;
     [SerializeField] private GameObject turretRing;
-   
+
 
     //Barrel Properties 
     [Header("Barrel")]
-    [SerializeField] private Transform barrelPivotPoint;
-    [SerializeField] private Transform barrelLocation;
-    [SerializeField] private Transform shellSpawn;
-    [SerializeField] private GameObject barrel;
     [SerializeField] private float elevationSpeed;
     [SerializeField] private float ZoomedElevationSpeed;
     [SerializeField] private float minEleHieght;
     [SerializeField] private float maxEleHieght;
+    [SerializeField] private Transform barrelPivotPoint;
+    [SerializeField] private Transform barrelLocation;
+    [SerializeField] private Transform shellSpawn;
+    [SerializeField] private GameObject barrel;
 
     //Camear Properties 
     [Header("Camera")]
@@ -42,24 +41,13 @@ public class TankMovment : MonoBehaviour
 
     //Shell Properties 
     [Header("Shell")]
+    [SerializeField] private float timer;
+    [SerializeField] private float timerBtwFire;
+    [SerializeField] private bool canFire;
     [SerializeField] private GameObject Shell;
     [SerializeField] private GameObject canister;
     [SerializeField] private Transform canisterSpwanPoint;
-    [SerializeField] private float timer; 
-    [SerializeField] private float timerBtwFire;
-    [SerializeField] private bool canFire;
     [SerializeField] private GameObject cooldownLightGreen;
-
-
-    //Conlition Properties 
-    // [Header("RayCastPos")]
-    // [SerializeField] private Transform frontRight;
-    // [SerializeField] private Transform frontLeft;
-    // [SerializeField] private Transform backRight;
-    // [SerializeField] private Transform backLeft;
-    // [SerializeField] private float RayLength = 0.5f;
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -101,7 +89,6 @@ public class TankMovment : MonoBehaviour
             Vector3 desBwdSpeed = new Vector3(0, 0, -backwardsSpeed * Time.deltaTime);
             transform.Translate(desBwdSpeed);
         }
-
 
 
         //Tank rotation
@@ -165,15 +152,15 @@ public class TankMovment : MonoBehaviour
         bool shoot = Input.GetKeyDown(KeyCode.Mouse0);
 
         //barrel reload
-        
+
         if (!canFire)//starting timer if can not fire 
         {
             timer += Time.deltaTime;
-                if (timer > timerBtwFire) // as soon as the timer gets to 0 canFire becomes true 
+            if (timer > timerBtwFire) // as soon as the timer gets to 0 canFire becomes true 
             {
                 canFire = true;
                 timer = 0;
-           
+
             }
         }
         if (shoot && canFire) // only allowing the player to shoot when both are true
@@ -188,30 +175,13 @@ public class TankMovment : MonoBehaviour
         if (!canFire) // changing a game object's active in world space 
         {
             cooldownLightGreen.SetActive(false);
-            
+
         }
         if (canFire)
         {
             cooldownLightGreen.SetActive(true);
         }
-       
-      
-        
-
 
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

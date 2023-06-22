@@ -426,6 +426,12 @@ MonoBehaviour:
   turretSpeed: 5
   angleOfRotation: 3
   turretRing: {fileID: 5492675024689710152}
+  elevationMentlet: {fileID: 5492675023838582233}
+  timer: 5
+  timerBtwFire: 5
+  canFire: 0
+  Shell: {fileID: 3125979292093955842, guid: 74ae2911b8fe59e40bdb4650131827ba, type: 3}
+  shellSpawn: {fileID: 5492675023370147191}
 --- !u!1 &5492675024403267274
 GameObject:
   m_ObjectHideFlags: 0
