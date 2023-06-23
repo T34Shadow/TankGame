@@ -1,7 +1,9 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnermyControler : MonoBehaviour
+
+
+public class EnemyController : MonoBehaviour
 {
     [Header("PlayerProperties")]
     [SerializeField] private GameObject playerTank;
@@ -10,7 +12,7 @@ public class EnermyControler : MonoBehaviour
     [SerializeField] private float minDisToPlayer;
     [SerializeField] private float maxDisToPlayer;
     [SerializeField] private bool isNearPlayer;
-    [SerializeField] private bool isToFar;
+    [SerializeField] private bool isTooFar;
 
     [Header("Tank's Movement Properties")]
     [SerializeField] float forwardSpeed;
@@ -44,33 +46,35 @@ public class EnermyControler : MonoBehaviour
         //if the displacement to the player is to far away the tank will want to close the discance 
         //if the displacement to the player is to close it will then want to move further away from the player
         //if non of this is true then the tank will hold it's current postion and aim, shoot and always hit the player
+        //isTooFar = displacementToPlayer > maxDisToPlayer; //THIS IS THE SAME - Finn
         if (displacementToPlayer > maxDisToPlayer)
         {
-            isToFar = true;
-
+            isTooFar = true;
+        
         }
         else
         {
-            isToFar = false;
+            isTooFar = false;
         }
 
         if (displacementToPlayer < minDisToPlayer)
         {
             isNearPlayer = true;
-            Retreat();
+            MoveAway();
         }
         else
         {
             isNearPlayer = false;
-
         }
+        //isNearPlayer = displacementToPlayer < minDisToPlayer;
+        //if (isNearPlayer) Retreat();
 
-        TankMovement();
+        UpdateMovement();
 
     }
-    public void TankMovement()
+    public void UpdateMovement()
     {
-        if (isToFar is true)
+        if (isTooFar)
         {
             MoveTowards(); // this is when the player is to far away
 
@@ -78,19 +82,6 @@ public class EnermyControler : MonoBehaviour
         else
         {
             HoldPostion(); // the player is both not far way and to close 
-
-        }
-
-    }
-    public void Retreat()
-    {
-        if (isNearPlayer is true)
-        {
-            MoveAway(); //for when the player gets to close 
-        }
-        else
-        {
-            HoldPostion(); // the player is both not far way and to close
         }
 
     }
@@ -118,7 +109,7 @@ public class EnermyControler : MonoBehaviour
         float velcoity = backwardsSpeed * Time.deltaTime;
 
         transform.LookAt(playerPos);
-        transform.rotation.x.IsUnityNull();
+        transform.rotation.x.IsUnityNull(); //Did you mean to get this as Euler angles and check if the X axis rotation is zero? -Finn
 
         Vector3 move = Vector3.back * velcoity;
         transform.Translate(move);
@@ -145,7 +136,7 @@ public class EnermyControler : MonoBehaviour
 
             }
         }
-        if (!isNearPlayer && !isToFar && canFire) // only allowing the tank to shoot when all conditions are met
+        if (!isNearPlayer && !isTooFar && canFire) // only allowing the tank to shoot when all conditions are met
         {
             canFire = false;
             //Instantatining the shell, while setting its spawn position then its direction, once spawned in, the shell script takes care of the rest
